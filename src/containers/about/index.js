@@ -1,22 +1,19 @@
 import React from 'react'
-import { Route } from 'react-router'
-import { render } from 'react-dom'
+import {render} from 'react-dom'
 
 class About extends React.Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-  }
+    }
 
-  render(){
-    return (
-      <div className="about">
-        abouts
-
-        {this.props.children}
-      </div>
-    )
-  }
+    render() {
+        return (
+            <div className="about">
+                abouts
+            </div>
+        )
+    }
 }
 
 export default About
