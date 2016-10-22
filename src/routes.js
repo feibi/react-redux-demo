@@ -8,7 +8,7 @@ import Contact from './containers/contact/'
 import Welcome from './containers/welcome/'
 const routes = (
     <Route path="/" component={App}>
-        <IndexRoute path="/" component={Welcome}/>
+        <IndexRoute  component={Welcome}/>
         <Route path="/contact" component={Contact}/>
         <Route path="/about" component={About}/>
     </Route>

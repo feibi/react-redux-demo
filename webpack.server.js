@@ -2,18 +2,22 @@ var webpack = require('webpack');
 var path = require('path');
 var HtmlwebpackPlugin = require('html-webpack-plugin');
 
+var minSize = {
+    minChunkSize: 51200,
+    compress: {
+        warnings: false
+    }
+};
 module.exports = {
     //页面入口文件配置
-    entry: {
-        index:[
-            'webpack-dev-server/client?http://127.0.0.1:3000',
-            'webpack/hot/only-dev-server',
+    entry:{
+        index: [
             './src/index.js'
-        ]
+        ],
     },
     //入口文件输出配置
     output: {
-        'path': path.join(__dirname, 'build'),
+        'path': path.join(__dirname, 'dist'),
         // 'publicPath': '/build',// 网站运行时的访问路径
         'filename': 'js/[name].[hash:8].js'
     },
@@ -31,15 +35,20 @@ module.exports = {
                 loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015']
             },
             {test: /\.(woff|eot|ttf)$/i, loader: 'url?limit=10000&name=fonts/[hash:8].[name].[ext]'},
-            {test: /\.scss$/, loader: "style!css!sass"},
-            //{test: /\.less$/, loader: "style!css!less"},
+            //{test: /\.scss$/, loader: "style!css!sass"},
+            {test: /\.less$/, loader: "style!css!less"},
             {test: /\.css$/, loader: "style!css"},
             {test: /\.(png|jpg|gif)$/, loader: "url-loader?limit=8192&name=./img/[hash].[ext]"}
         ]
     },
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'cheap-module-source-map',
     //插件项
     plugins: [//将外部的包导出成一个公用的文件比如 jquery，react, react-dom 等
+        new webpack.optimize.MinChunkSizePlugin(minSize),
+        new webpack.optimize.LimitChunkCountPlugin({
+            maxChunks:50,
+            entryChunkMultiplicator:2
+        }),
         new HtmlwebpackPlugin({
             title: 'BBD',
             template: './src/index.html', //html模板路径
@@ -49,9 +58,16 @@ module.exports = {
         }),//添加我们的插件 会自动生成一个html文件
         new webpack.DefinePlugin({ //开发模式
             "process.env": {
-                NODE_ENV: JSON.stringify("development") //development,production
+                NODE_ENV: JSON.stringify("production") //development,production
             },
-            __DEVTOOLS__:true
+            __DEVTOOLS__:false
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                drop_console:true,
+                warnings: false
+            },
+            sourceMap:true
         }),
         new webpack.NoErrorsPlugin(), //启用报错不打断模式
         new webpack.HotModuleReplacementPlugin() //热替换插件

@@ -13,13 +13,21 @@ import DevTools from './containers/DevTools';
 
 const store = configureStore(rootReducer)  // 路由的store*/
 
+console.log(process.env,__DEVTOOLS__)
+function createElements () {
+    if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
+        return (
+            <DevTools />
+        )
+    }
+}
 const history = syncHistoryWithStore(hashHistory, store)
 render(
     (
         <Provider store={store}>
             <div className="devtools">
                 <Router history={history} routes={routes}/>
-                <DevTools />
+                {createElements()}
             </div>
         </Provider>
     ), document.getElementById('root')
