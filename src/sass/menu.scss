@@ -1,0 +1,17 @@
+$baseBackground: rgb(51,153,204);
+
+.menu {
+    display: flex;
+    line-height: 50px;
+    background: $baseBackground;
+
+    a {
+        padding: 0 10px;
+        text-decoration: none;
+        color: #fff;
+
+        &.active {
+            color: #adf;
+        }
+    }
+}

@@ -13,11 +13,11 @@ import DevTools from './containers/DevTools';
 
 const store = configureStore(rootReducer)  // 路由的store*/
 
-console.log(process.env,__DEVTOOLS__)
+console.info(process.env,__DEVTOOLS__)
 function createElements () {
     if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
         return (
-            <DevTools />
+            <DevTools key="devtools"/>
         )
     }
 }

@@ -11,7 +11,7 @@ class Welcome extends React.Component {
     }
     render(){
         return (
-            <div className="welcome">
+            <div className="welcome" style={{height:"50px",background:"green"}}>
                 hello world!
             </div>
         )
