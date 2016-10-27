@@ -89,7 +89,7 @@ gulp.task("default", ["clean"], function() {
 gulp.task("webpack-dev-server", function(callback) {
     // modify some webpack config options
     var myConfig = Object.create(webpackConfig);
-    myConfig.devtool = "eval";
+    //myConfig.devtool = "eval";
     myConfig.debug = true;
 
     // Start a webpack-dev-server
@@ -119,7 +119,11 @@ gulp.task("webpack-dev-server", function(callback) {
 });
 
 // Production build
-gulp.task("build", ["webpack:build"]);
+gulp.task("build",["clean"], function() {
+    options.isPro = true;
+    options.isDev = false;
+    runSequence(["sass", "html", "images"],["webpack:build"]);
+});
 
 gulp.task("webpack:build", function(callback) {
     // modify some webpack config options
