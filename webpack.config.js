@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var HtmlwebpackPlugin = require('html-webpack-plugin');
-var ChunkManifestPlugin=require('chunk-manifest-webpack-plugin');
+var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const vendors = [
     'react',
@@ -50,7 +50,7 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/,
                 // 在这里添加 react-hot，注意这里使用的是loaders，所以不能用 query，应该把presets参数写在 babel 的后面
                 loaders: ['react-hot', 'babel'],
-                 include: /src/,
+                include: /src/,
             }, {
                 test: /\.(woff|eot|ttf)$/i,
                 loader: 'url?limit=10000&name=fonts/[hash:8].[name].[ext]'
@@ -66,6 +66,10 @@ module.exports = {
             // {test: /\.(png|jpg|gif)$/, loader: "url-loader?limit=8192&name=./img/[hash].[ext]"}
         ]
     },
+    // externals: {
+    //     'react': 'React',
+    //     'react-dom': 'ReactDOM'
+    // },
     devtool: 'cheap-module-eval-source-map',
     //插件项
     plugins: [ //将外部的包导出成一个公用的文件比如 jquery，react, react-dom 等
@@ -85,10 +89,10 @@ module.exports = {
         new webpack.NoErrorsPlugin(), //启用报错不打断模式
         new webpack.HotModuleReplacementPlugin(), //热替换插件
         new CommonsChunkPlugin({
-             names: ['vendor', 'manifest'],
+            names: ['vendor', 'manifest'],
 
 
-            // filename: "vendor.js"
+            //filename: "vendor.js",
             // (Give the chunk a different name)
 
             minChunks: Infinity,
@@ -96,8 +100,8 @@ module.exports = {
             //  goes into the vendor chunk)
         }),
         new ChunkManifestPlugin({
-          filename:"chunk-manifest.json",
-          manifestVariable:"webpackManifest"
+            filename: "manifest.json",
+            manifestVariable: "webpackManifest"
         })
     ]
 };

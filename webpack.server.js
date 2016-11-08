@@ -15,7 +15,7 @@ module.exports = {
         index: [
             './src/index.js'
         ],
-        vendor: ["react", "react-dom", "react-router", "redux", 'velocity-react', 'velocity-animate'],
+        vendor: ["react", "react-dom", "react-router", "redux",'react-redux','react-router-redux'],
     },
     //入口文件输出配置
     output: {
@@ -55,7 +55,7 @@ module.exports = {
     //  devtool: 'cheap-module-source-map',
     //插件项
     plugins: [ //将外部的包导出成一个公用的文件比如 jquery，react, react-dom 等
-      //  new webpack.optimize.MinChunkSizePlugin(minSize), //合并小尺寸chunk
+        //  new webpack.optimize.MinChunkSizePlugin(minSize), //合并小尺寸chunk
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 50,
             entryChunkMultiplicator: 2

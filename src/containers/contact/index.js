@@ -9,7 +9,7 @@ class Contact extends React.Component {
 
     }
     handleClick(){
-        console.log('点了');
+        console.log('点了1ds');
     }
     render() {
         return (

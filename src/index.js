@@ -9,13 +9,14 @@ import {syncHistoryWithStore} from 'react-router-redux'
 import routes from './routes'
 import configureStore from './configureStore'
 import rootReducer from './reducers/rooterReducer'
-import DevTools from './containers/DevTools';
+
 
 const store = configureStore(rootReducer)  // 路由的store*/
 
 console.info(process.env,__DEVTOOLS__)
 function createElements () {
     if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
+    const DevTools=require( './containers/DevTools') ;
         return (
             <DevTools key="devtools"/>
         )
