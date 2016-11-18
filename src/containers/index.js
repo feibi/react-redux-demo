@@ -7,34 +7,42 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router'
 //import {VelocityComponent,VelocityTransitionGroup} from 'velocity-react'
 import Menu from './menu/'
+import Button from './../components/button/button'
 // require('velocity-animate');
 //require('velocity-animate/velocity.ui');
 class App extends React.Component {
     constructor(props) {
         super(props)
-        this.state={
-          showSubComponent:true
+        this.state = {
+            showSubComponent: true
         }
-      //  this.handleClick.bind(this)
+        //  this.handleClick.bind(this)
     }
-    handleClick(e){
-      this.setState({
-        showSubComponent:!this.state.showSubComponent
-      })
+    handleClick(e) {
+        this.setState({
+            showSubComponent: !this.state.showSubComponent
+        })
     }
 
     render() {
+
+        console.log(this.props.location)
         return (
             <div className="container">
-                <Menu/>
-                <div className="panel">
+                <Menu/> {/* <div className="panel">
                   <button onClick={this.handleClick.bind(this)}>点我吧!</button>
-                </div>
+                </div> */}
+                <Button/>
                 <div className="section">
-                    <Link to='/about'>about</Link>
+                    {this.props.children}
                 </div>
+
             </div>
         )
     }
 }
-module.exports = connect()(App)
+function mapStateToProps(state) {
+    return {}
+}
+
+module.exports = connect(mapStateToProps)(App)

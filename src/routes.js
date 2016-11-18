@@ -4,12 +4,12 @@ import {render} from 'react-dom'
 
 import App from './containers/index'
 import About from './containers/about/'
-import Contact from './containers/contact/'
+import FindRoom from './containers/findRoom/'
 import Welcome from './containers/welcome/'
 const routes = (
     <Route path="/" component={App}>
-        <IndexRoute  component={Welcome}/>
-        <Route path="/contact" component={Contact}/>
+        <IndexRoute component={FindRoom}/>
+        <Route path="/contact" component={FindRoom}/>
         <Route path="/about" component={About}/>
     </Route>
 )

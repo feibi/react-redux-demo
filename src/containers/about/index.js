@@ -1,6 +1,6 @@
 import React from 'react'
 import {render} from 'react-dom'
-
+import QueueAnim from 'rc-queue-anim';
 class About extends React.Component {
     constructor(props) {
         super(props);
@@ -9,9 +9,18 @@ class About extends React.Component {
 
     render() {
         return (
-            <div className="about">
-                abouts
-            </div>
+
+            <QueueAnim animConfig={{
+                opacity: [
+                    1, 0
+                ],
+                translateX: [0, -30]
+            }}>
+                <div key='0' className="about">
+                    abouts
+                </div>
+            </QueueAnim>
+
         )
     }
 }

@@ -10,26 +10,21 @@ import routes from './routes'
 import configureStore from './configureStore'
 import rootReducer from './reducers/rooterReducer'
 
+const store = configureStore(rootReducer) // 路由的store*/
 
-const store = configureStore(rootReducer)  // 路由的store*/
-
-console.info(process.env,__DEVTOOLS__)
-function createElements () {
+console.info(process.env, __DEVTOOLS__)
+function createElements() {
     if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
-    const DevTools=require( './containers/DevTools') ;
-        return (
-            <DevTools key="devtools"/>
-        )
+        const DevTools = require('./containers/DevTools');
+        return (<DevTools key="devtools"/>)
     }
 }
+//         {createElements()}
 const history = syncHistoryWithStore(hashHistory, store)
-render(
-    (
-        <Provider store={store}>
-            <div className="devtools">
-                <Router history={history} routes={routes}/>
-                {createElements()}
-            </div>
-        </Provider>
-    ), document.getElementById('root')
-)
+render((
+    <Provider store={store}>
+        <div className="devtools">
+            <Router history={history} routes={routes}/>
+        </div>
+    </Provider>
+), document.getElementById('root'))

@@ -6,6 +6,8 @@
     "build": "set NODE_ENV=production && webpack -p --config webpack.config.prod.js --progress --colors"
   },
   "dependencies": {
+    "rc-queue-anim": "^0.12.5",
+    "rc-tween-one": "^0.11.9",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-redux": "^4.4.5",
@@ -28,6 +30,7 @@
     "babel-preset-stage-1": "^6.5.0",
     "babel-runtime": "^6.11.6",
     "browser-sync": "^2.17.5",
+    "classnames": "^2.2.5",
     "css-loader": "^0.23.1",
     "express": "^4.14.0",
     "file-loader": "^0.9.0",
@@ -51,6 +54,7 @@
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
+    "webpack-dashboard": "^0.2.0",
     "webpack-dev-server": "^1.14.1"
   }
 }

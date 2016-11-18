@@ -100,6 +100,7 @@ gulp.task("webpack-dev-server", function(callback) {
         },
         hot: true,
         inline: true,
+        quiet: true,
         proxy: {
             '/personal*': {
                 target: 'http://www.baidu.com',
