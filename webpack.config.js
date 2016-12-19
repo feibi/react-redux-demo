@@ -6,7 +6,7 @@ var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 // webpack-dashboard
 var Dashboard = require('webpack-dashboard');
 var DashboardPlugin = require('webpack-dashboard/plugin');
-var dashboard = new Dashboard();
+//var dashboard = new Dashboard();
 
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const vendors = [
@@ -84,10 +84,10 @@ module.exports = {
     //     'react': 'React',
     //     'react-dom': 'ReactDOM'
     // },
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     //插件项
     plugins: [ //将外部的包导出成一个公用的文件比如 jquery，react, react-dom 等
-        new DashboardPlugin(dashboard.setData),
+        //new DashboardPlugin(dashboard.setData),
         new HtmlwebpackPlugin({
             title: 'BBD', template: './src/index.html', //html模板路径
             filename: 'index.html',

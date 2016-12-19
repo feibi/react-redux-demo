@@ -22,6 +22,8 @@ class Menu extends React.Component {
                     关于我们</Link>
                 <Link to="/contact" activeClassName="active">
                     联系我们</Link>
+                    <Link to="/list" activeClassName="active">
+                        列表</Link>
             </div>
 
         )

@@ -45,6 +45,14 @@ gulp.task('html', function() {
         }));
 });
 
+gulp.task('fonts',function () {
+  return gulp.src("./src/fonts/**")
+      .pipe(gulp.dest('./build/fonts/'))
+      .pipe(reload({
+          stream: true
+      }));
+})
+
 gulp.task('sass', function() {
     var sassIn = gulp.src("./src/sass/base.scss")
         .pipe(plumber())
@@ -83,7 +91,7 @@ gulp.task('images', function() {
 gulp.task("default", ["clean"], function() {
     options.isPro = false;
     options.isDev = true;
-    runSequence(["sass", "html", "images"], ["watch", "webpack-dev-server"]);
+    runSequence(["sass", "html", "images",'fonts'], ["watch", "webpack-dev-server"]);
 });
 
 gulp.task("webpack-dev-server", function(callback) {
@@ -100,7 +108,7 @@ gulp.task("webpack-dev-server", function(callback) {
         },
         hot: true,
         inline: true,
-        quiet: true,
+        //quiet: true,
         proxy: {
             '/personal*': {
                 target: 'http://www.baidu.com',
@@ -113,7 +121,7 @@ gulp.task("webpack-dev-server", function(callback) {
                 changeOrigin: true
             },
         },
-    }).listen(3000, "localhost", function(err) {
+    }).listen(3000, "0.0.0.0", function(err) {
         if (err) throw new gutil.PluginError("webpack-dev-server", err);
         gutil.log("[webpack-dev-server]", "http://localhost:3000/webpack-dev-server/index.html");
     });
@@ -123,7 +131,7 @@ gulp.task("webpack-dev-server", function(callback) {
 gulp.task("build",["clean"], function() {
     options.isPro = true;
     options.isDev = false;
-    runSequence(["sass", "html", "images"],["webpack:build"]);
+    runSequence(["sass", "html", "images",'fonts'],["webpack:build"]);
 });
 
 gulp.task("webpack:build", function(callback) {

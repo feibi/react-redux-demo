@@ -19,19 +19,19 @@ class FindRoom extends React.Component {
                 <QueueAnim type={['bottom', 'top']} interval={80}>
                     <div key='0' className="item-filter">
                         <span>区域</span>
-                        <span className="select-value">区域/地铁 二选一</span>
+                        <span className="select-value">flalskdf;las asdlk</span>
                     </div>
                     <div key='1' className="item-filter">
-                        <span>地铁</span>
-                        <span className="select-value">区域/地铁 二选一</span>
+                        <span>█</span>
+                        <span className="select-value">d jjj lk</span>
                     </div>
                     <div key='2' className="item-filter">
                         <span>租金</span>
-                        <span className="select-value">请选择租金</span>
+                        <span className="select-value"> k df; las asdffggf gh</span>
                     </div>
                     <div key='3' className="item-filter">
                         <span>租房类型</span>
-                        <span className="select-value">请选择类型</span>
+                        <span className="select-value">asdffggf asdfsdf</span>
                     </div>
                 </QueueAnim>
 

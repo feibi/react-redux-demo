@@ -1,9 +1,6 @@
-import { combineReducers } from 'redux'
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
-import {
-    SELECT_SUBREDDIT, INVALIDATE_SUBREDDIT ,
-    REQUEST_POSTS, RECEIVE_POSTS
-} from '../actions/action'
+import {combineReducers} from 'redux'
+import {syncHistoryWithStore, routerReducer} from 'react-router-redux'
+import {SELECT_SUBREDDIT, INVALIDATE_SUBREDDIT, REQUEST_POSTS, RECEIVE_POSTS} from '../actions/action'
 
 function selectedSubreddit(state = 'reactjs', action) {
     switch (action.type) {
@@ -20,10 +17,8 @@ function posts(state = {
     items: []
 }, action) {
     switch (action.type) {
-        case INVALIDATE_SUBREDDIT :
-            return Object.assign({}, state, {
-                didInvalidate: true
-            })
+        case INVALIDATE_SUBREDDIT:
+            return Object.assign({}, state, {didInvalidate: true})
         case REQUEST_POSTS:
             return Object.assign({}, state, {
                 isFetching: true,
@@ -41,9 +36,9 @@ function posts(state = {
     }
 }
 
-function postsBySubreddit(state = { }, action) {
+function postsBySubreddit(state = {}, action) {
     switch (action.type) {
-        case INVALIDATE_SUBREDDIT :
+        case INVALIDATE_SUBREDDIT:
         case RECEIVE_POSTS:
         case REQUEST_POSTS:
             return Object.assign({}, state, {
@@ -54,10 +49,6 @@ function postsBySubreddit(state = { }, action) {
     }
 }
 
-const rootReducer = combineReducers({
-    routing: routerReducer,
-    postsBySubreddit,
-    selectedSubreddit,
-})
+const rootReducer = combineReducers({routing: routerReducer})
 
 export default rootReducer

@@ -1,8 +1,21 @@
-.item-filter{
-  display: flex;
-  line-height: 50px;
-  justify-content: space-between;
-  .select-value{
-    color: #ddd;
-  }
+.item-filter {
+    display: flex;
+    padding: 15px 0;
+    justify-content: space-between;
+    font-family: 'BLOKK', Arial, sans-serif;
+
+    span {
+        // background: #ddd;
+        // color: #ddd;
+       font-family:'BLOKK', Arial, sans-serif;
+      //  line-height: 10px;
+        //height: 10px;
+        display: inline-block;
+        overflow: hidden;
+    }
+
+    .select-value {
+        color: #ddd;
+      //  background: #ddd;
+    }
 }

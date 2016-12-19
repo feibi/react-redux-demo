@@ -1,0 +1,12 @@
+.list {
+    line-height: 50px;
+    margin: 0 -15px;
+
+    li {
+        padding: 0 15px;
+    }
+
+    li:nth-of-type(odd) {
+        background: #ddd;
+    }
+}
