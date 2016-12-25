@@ -27,7 +27,7 @@ const options = {
 
 gulp.task('watch', function() {
     options.isFirstRun = false;
-    gulp.watch("./src/sass/*.scss", ['sass']);
+    //gulp.watch("./src/sass/*.scss", ['sass']);
     gulp.watch("./src/**/*.html", ['html']);
 });
 
@@ -37,13 +37,13 @@ gulp.task('clean', function() {
     }).pipe(clean());
 });
 
-gulp.task('html', function() {
-    return gulp.src("./src/**/*.html")
-        .pipe(gulp.dest('./build'))
-        .pipe(reload({
-            stream: true
-        }));
-});
+// gulp.task('html', function() {
+//     return gulp.src("./src/**/*.html")
+//         .pipe(gulp.dest('./build'))
+//         .pipe(reload({
+//             stream: true
+//         }));
+// });
 
 gulp.task('fonts',function () {
   return gulp.src("./src/fonts/**")
@@ -53,25 +53,25 @@ gulp.task('fonts',function () {
       }));
 })
 
-gulp.task('sass', function() {
-    var sassIn = gulp.src("./src/sass/base.scss")
-        .pipe(plumber())
-        .pipe(sourcemaps.init())
-        .pipe(sass().on('error', sass.logError))
-        .pipe(sourcemaps.write())
-        .pipe(autoprefixer({
-            browsers: ['last 2 versions', 'Android >= 4.0'],
-            cascade: true, //是否美化属性值 默认：true
-            remove: true //是否去掉不必要的前缀 默认：true
-        }))
-        .pipe(gulp.dest("build/css"));
-    return options.isPro ? sassIn.pipe(cleanCSS())
-        .pipe(gulp.dest("dist/css")).pipe(reload({
-            stream: true
-        })) : sassIn.pipe(reload({
-            stream: true
-        }));
-});
+// gulp.task('sass', function() {
+//     var sassIn = gulp.src("./src/sass/base.scss")
+//         .pipe(plumber())
+//         .pipe(sourcemaps.init())
+//         .pipe(sass().on('error', sass.logError))
+//         .pipe(sourcemaps.write())
+//         .pipe(autoprefixer({
+//             browsers: ['last 2 versions', 'Android >= 4.0'],
+//             cascade: true, //是否美化属性值 默认：true
+//             remove: true //是否去掉不必要的前缀 默认：true
+//         }))
+//         .pipe(gulp.dest("build/style"));
+//     return options.isPro ? sassIn.pipe(cleanCSS())
+//         .pipe(gulp.dest("dist/style")).pipe(reload({
+//             stream: true
+//         })) : sassIn.pipe(reload({
+//             stream: true
+//         }));
+// });
 
 gulp.task('images', function() {
     if (options.hasImages) {
@@ -91,7 +91,7 @@ gulp.task('images', function() {
 gulp.task("default", ["clean"], function() {
     options.isPro = false;
     options.isDev = true;
-    runSequence(["sass", "html", "images",'fonts'], ["watch", "webpack-dev-server"]);
+    runSequence(["images",'fonts'], ["watch", "webpack-dev-server"]);
 });
 
 gulp.task("webpack-dev-server", function(callback) {
@@ -131,7 +131,7 @@ gulp.task("webpack-dev-server", function(callback) {
 gulp.task("build",["clean"], function() {
     options.isPro = true;
     options.isDev = false;
-    runSequence(["sass", "html", "images",'fonts'],["webpack:build"]);
+    runSequence(["images",'fonts'],["webpack:build"]);
 });
 
 gulp.task("webpack:build", function(callback) {

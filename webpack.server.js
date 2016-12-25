@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 var HtmlwebpackPlugin = require('html-webpack-plugin');
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
-
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 var minSize = {
     minChunkSize: 51200,
     compress: {
@@ -19,15 +19,15 @@ module.exports = {
             "react-router",
             "redux",
             'react-redux',
-            'react-router-redux',
+            'react-router-redux'
         ]
     },
     //入口文件输出配置
     output: {
         'path': path.join(__dirname, 'dist'),
         // 'publicPath': '/build',// 网站运行时的访问路径
-        'filename': 'js/[id].[chunkhash:8].js',
-        'chunkFilename': 'js/[id]-[chunkhash:8].js'
+        'filename': 'js/[name].[chunkhash:8].js',
+        'chunkFilename': 'js/[name]-[chunkhash:8].js'
     },
     resolve: {
         extensions: [
@@ -47,22 +47,21 @@ module.exports = {
                 test: /\.js?$/,
                 exclude: /(node_modules|bower_components)/,
                 // 在这里添加 react-hot，注意这里使用的是loaders，所以不能用 query，应该把presets参数写在 babel 的后面
-                loaders: [
-                    'react-hot', 'babel'
-                ],
+                loader: 'babel',
                 include: /src/
             }, {
-                test: /\.(woff|eot|ttf)$/i,
+                test: /\.(gif|jpg|png|woff|svg|eot|ttf|otf)\??.*$/,
                 loader: 'url?limit=10000&name=fonts/[hash:8].[name].[ext]'
             }, {
                 test: /\.scss$/,
-                loader: "style!css!sass"
-            },
-            //{test: /\.less$/, loader: "style!css!less"},
-            {
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
+            }, {
                 test: /\.css$/,
-                loader: "style!css"
-            },
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+            }, {
+                test: /\.html$/,
+                loader: 'html-loader'
+            }
             // {test: /\.(png|jpg|gif)$/, loader: "url-loader?limit=8192&name=./img/[hash].[ext]"}
         ]
     },
@@ -83,7 +82,7 @@ module.exports = {
             //  goes into the vendor chunk)
         }),
         new HtmlwebpackPlugin({
-            title: 'pro', template: './src/index.html', //html模板路径
+            template: __dirname + '/src/index.html', //html模板路径
             filename: 'index.html',
             inject: true, //允许插件修改哪些内容，包括head与body
             hash: false //为静态资源生成hash值
@@ -99,8 +98,9 @@ module.exports = {
                 drop_console: true,
                 warnings: false
             },
-            sourceMap: true
+            sourceMap: false
         }),
+        new ExtractTextPlugin("style/[name]-[chunkhash:8].css"),
         new webpack.NoErrorsPlugin(), //启用报错不打断模式
         //new webpack.HotModuleReplacementPlugin() //热替换插件   使用chunkhash后不能用此插件
     ]

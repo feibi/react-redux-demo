@@ -9,7 +9,7 @@ import {syncHistoryWithStore} from 'react-router-redux'
 import routes from './routes'
 import configureStore from './configureStore'
 import rootReducer from './reducers/rooterReducer'
-
+import "./sass/base.scss";
 const store = configureStore(rootReducer) // 路由的store*/
 
 console.info(process.env, __DEVTOOLS__)

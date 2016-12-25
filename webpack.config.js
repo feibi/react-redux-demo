@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 var HtmlwebpackPlugin = require('html-webpack-plugin');
 var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
-
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 // webpack-dashboard
 var Dashboard = require('webpack-dashboard');
 var DashboardPlugin = require('webpack-dashboard/plugin');
@@ -31,7 +31,7 @@ module.exports = {
     //页面入口文件配置
     entry: {
         index: [
-            'webpack-dev-server/client?http://127.0.0.1:3000', 'webpack/hot/only-dev-server', './src/index.js'
+            'webpack-dev-server/client?http://0.0.0.0:3000', 'webpack/hot/only-dev-server', './src/index.js'
         ],
         "vendor": vendors
     },
@@ -66,16 +66,16 @@ module.exports = {
                 ],
                 include: /src/
             }, {
-                test: /\.(woff|eot|ttf)$/i,
+                test: /\.(gif|jpg|png|woff|svg|eot|ttf|otf)\??.*$/,
                 loader: 'url?limit=10000&name=fonts/[hash:8].[name].[ext]'
             }, {
                 test: /\.scss$/,
-                loader: "style!css!sass"
+                loader: ExtractTextPlugin.extract('style', 'css?sourceMap!sass?sourceMap')
             },
             //{test: /\.less$/, loader: "style!css!less"},
             {
                 test: /\.css$/,
-                loader: "style!css"
+                loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap')
             },
             // {test: /\.(png|jpg|gif)$/, loader: "url-loader?limit=8192&name=./img/[hash].[ext]"}
         ]
@@ -89,7 +89,7 @@ module.exports = {
     plugins: [ //将外部的包导出成一个公用的文件比如 jquery，react, react-dom 等
         //new DashboardPlugin(dashboard.setData),
         new HtmlwebpackPlugin({
-            title: 'BBD', template: './src/index.html', //html模板路径
+            template: __dirname + '/src/index.html', //html模板路径
             filename: 'index.html',
             inject: true, //允许插件修改哪些内容，包括head与body
             hash: false //为静态资源生成hash值
@@ -114,6 +114,7 @@ module.exports = {
             // (with more entries, this ensures that no other module
             //  goes into the vendor chunk)
         }),
+        new ExtractTextPlugin("style/[name].[chunkhash].css"),
         new ChunkManifestPlugin({filename: "manifest.json", manifestVariable: "webpackManifest"})
     ]
 };
