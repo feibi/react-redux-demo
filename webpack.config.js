@@ -84,7 +84,7 @@ module.exports = {
     //     'react': 'React',
     //     'react-dom': 'ReactDOM'
     // },
-    devtool: 'source-map',
+    devtool: 'cheap-module-eval-source-map',
     //插件项
     plugins: [ //将外部的包导出成一个公用的文件比如 jquery，react, react-dom 等
         //new DashboardPlugin(dashboard.setData),
@@ -115,6 +115,6 @@ module.exports = {
             //  goes into the vendor chunk)
         }),
         new ExtractTextPlugin("style/[name].[chunkhash].css"),
-        new ChunkManifestPlugin({filename: "manifest.json", manifestVariable: "webpackManifest"})
+        //new ChunkManifestPlugin({filename: "manifest.json", manifestVariable: "webpackManifest"})
     ]
 };
