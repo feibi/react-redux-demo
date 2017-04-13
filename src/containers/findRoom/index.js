@@ -1,8 +1,9 @@
 import React from 'react'
-import {render} from 'react-dom'
+import {withRouter} from 'react-router'
 import QueueAnim from 'rc-queue-anim';
 import './index.scss'
 
+@withRouter
 class FindRoom extends React.Component {
     constructor(props) {
         super(props)

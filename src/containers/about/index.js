@@ -1,5 +1,5 @@
 import React from 'react'
-import {render} from 'react-dom'
+import {connect} from 'react-redux'
 import QueueAnim from 'rc-queue-anim';
 import  Message from './../../components/Message'
 import Button from './../../components/button/button'
@@ -70,8 +70,6 @@ class About extends React.Component {
                 translateX: [0, -30]
             }}>
                 <div key='0' className="about">
-
-                    abouts
                     <div className="panel">
                         <Button title="默认自动关闭" onClick={this.handleClick}/>
                     </div>
@@ -88,4 +86,7 @@ class About extends React.Component {
     }
 }
 
-export default About
+function mapStateToProps(state) {
+    return {}
+}
+export default connect(mapStateToProps)(About)

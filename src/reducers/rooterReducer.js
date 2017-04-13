@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import {syncHistoryWithStore, routerReducer} from 'react-router-redux'
+import { routerReducer} from 'react-router-redux'
 import {SELECT_SUBREDDIT, INVALIDATE_SUBREDDIT, REQUEST_POSTS, RECEIVE_POSTS} from '../actions/action'
 
 function selectedSubreddit(state = 'reactjs', action) {
@@ -49,6 +49,6 @@ function postsBySubreddit(state = {}, action) {
     }
 }
 
-const rootReducer = combineReducers({routing: routerReducer})
+const rootReducer = combineReducers({posts})
 
 export default rootReducer

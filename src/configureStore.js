@@ -12,7 +12,7 @@ if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
     const DevTools = require('./containers/DevTools')
     // 创建一个中间件集合
     const middleware = [thunk]; //, loggerMiddleware
-    configureStore = compose(applyMiddleware(...middleware), DevTools.instrument())(createStore);
+    configureStore = compose(applyMiddleware(...middleware))(createStore);
 } else {
     configureStore = compose(applyMiddleware(thunk))(createStore);
 }

@@ -2,54 +2,44 @@
  * Created by zylee on 2016/10/20.
  */
 import React from 'react'
-import { render } from 'react-dom'
-import Upload from './../../components/upload/'
-
+import {render} from 'react-dom'
+import Slider from 'react-slick'
+import './index.scss'
 class Welcome extends React.Component {
     constructor(props) {
         super(props);
 
     }
-    render(){
-        const props = {
-            name: 'file',
-            action: '/ss',
-            headers: {
-                authorization: 'authorization-text',
-            },
-            listType: 'picture-card',
-            defaultFileList: [{
-                uid: -1,
-                name: 'xxx.png',
-                status: 'done',
-                url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-                thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-            }, {
-                uid: -2,
-                name: 'yyy.png',
-                status: 'done',
-                url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-                thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-            }],
-            onChange(info) {
-                if (info.file.status !== 'uploading') {
-                    console.log(info.file, info.fileList);
-                }
-                if (info.file.status === 'done') {
-
-                    console.info(`${info.file.name} file uploaded successfully`);
-                } else if (info.file.status === 'error') {
-                    console.error(`${info.file.name} file upload failed.`);
-                }
-            },
+    render() {
+        var settings = {
+            dots: true,
+            infinite: true,
+            speed: 500,
+            //slidesToShow: 1,
+            slidesToScroll: 1
         };
-
         return (
-            <div className="welcome">
-                hello world!
-                <Upload {...props}><div className="ant-upload-text">Upload</div></Upload>
-            </div>
-        )
+            <Slider {...settings}>
+                <div>
+                    <h3>1</h3>
+                </div>
+                <div>
+                    <h3>2</h3>
+                </div>
+                <div>
+                    <h3>3</h3>
+                </div>
+                <div>
+                    <h3>4</h3>
+                </div>
+                <div>
+                    <h3>5</h3>
+                </div>
+                <div>
+                    <h3>6</h3>
+                </div>
+            </Slider>
+        );
     }
 }
 

@@ -7,8 +7,8 @@ var gulp = require("gulp"),
     runSequence = require('run-sequence'),
     imagemin = require('gulp-imagemin'),
     gutil = require("gulp-util"),
-    autoprefixer = require('gulp-autoprefixer'),
-    sass = require("gulp-sass");
+    autoprefixer = require('gulp-autoprefixer');
+ //   sass = require("gulp-sass");
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
 var webpackConfig = require("./webpack.config.js");
@@ -121,9 +121,9 @@ gulp.task("webpack-dev-server", function(callback) {
                 changeOrigin: true
             },
         },
-    }).listen(3000, "0.0.0.0", function(err) {
+    }).listen(8080, "0.0.0.0", function(err) {
         if (err) throw new gutil.PluginError("webpack-dev-server", err);
-        gutil.log("[webpack-dev-server]", "http://localhost:3000/webpack-dev-server/index.html");
+        gutil.log("[webpack-dev-server]", "http://localhost:8080/webpack-dev-server/index.html");
     });
 });
 

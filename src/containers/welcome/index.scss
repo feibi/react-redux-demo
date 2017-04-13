@@ -1,0 +1,21 @@
+.slick-slider {
+    position: relative;
+}
+
+.slick-list {
+    position: relative;
+}
+
+.slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+}
+
+.slick-slide {
+    //display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+}

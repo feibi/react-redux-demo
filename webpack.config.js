@@ -1,11 +1,11 @@
-var webpack = require('webpack');
-var path = require('path');
-var HtmlwebpackPlugin = require('html-webpack-plugin');
-var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+let webpack = require('webpack');
+let path = require('path');
+let HtmlwebpackPlugin = require('html-webpack-plugin');
+//var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
 // webpack-dashboard
-var Dashboard = require('webpack-dashboard');
-var DashboardPlugin = require('webpack-dashboard/plugin');
+let Dashboard = require('webpack-dashboard');
+let DashboardPlugin = require('webpack-dashboard/plugin');
 //var dashboard = new Dashboard();
 
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
@@ -17,21 +17,22 @@ const vendors = [
     'redux',
     "react-redux",
     'velocity-react',
-    'velocity-animate'
+    'velocity-animate',
+    'rc-queue-anim',
     // ...其它库
 ];
-var minSize = {
+let minSize = {
     minChunkSize: 51200,
     compress: {
         warnings: false
     }
 }
-
+let routeComponentRegex = /containers\/([^\/]+\/?[^\/]+).js$/
 module.exports = {
     //页面入口文件配置
     entry: {
         index: [
-            'webpack-dev-server/client?http://0.0.0.0:3000', 'webpack/hot/only-dev-server', './src/index.js'
+            'webpack-dev-server/client?http://0.0.0.0:8080', 'webpack/hot/only-dev-server', './src/index.js'
         ],
         "vendor": vendors
     },
@@ -76,7 +77,11 @@ module.exports = {
             {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap')
-            },
+            }, {
+                test: routeComponentRegex,
+                include: path.resolve(__dirname, 'src'),
+                loaders: ['bundle?lazy', 'babel']
+            }
             // {test: /\.(png|jpg|gif)$/, loader: "url-loader?limit=8192&name=./img/[hash].[ext]"}
         ]
     },
