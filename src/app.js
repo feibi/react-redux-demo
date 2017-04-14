@@ -2,7 +2,6 @@
  * Created by zylee on 2016/10/20.
  */
 import React from 'react'
-import {Link} from 'react-router'
 //import {VelocityComponent,VelocityTransitionGroup} from 'velocity-react'
 import Menu from './components/menu'
 import Routes from './routes'
@@ -32,4 +31,4 @@ function mapStateToProps(state) {
     return {}
 }
 
-module.exports = App
+module.exports = App;

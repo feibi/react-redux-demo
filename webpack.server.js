@@ -1,14 +1,16 @@
-var webpack = require('webpack');
-var path = require('path');
-var HtmlwebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const path = require('path');
+const HtmlwebpackPlugin = require('html-webpack-plugin');
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-var minSize = {
+const minSize = {
     minChunkSize: 51200,
     compress: {
         warnings: false
     }
 };
+const routeComponentRegex = /pages\/([^\/]+\/?[^\/]+).js$/
+
 module.exports = {
     //页面入口文件配置
     entry: {
@@ -27,7 +29,7 @@ module.exports = {
         'path': path.join(__dirname, 'dist'),
         // 'publicPath': '/build',// 网站运行时的访问路径
         'filename': 'js/[name].[chunkhash:8].js',
-        'chunkFilename': 'js/[name]-[chunkhash:8].js'
+        'chunkFilename': 'js/page[name]-[chunkhash:8].js'
     },
     resolve: {
         extensions: [
@@ -61,6 +63,10 @@ module.exports = {
             }, {
                 test: /\.html$/,
                 loader: 'html-loader'
+            }, {
+                test: routeComponentRegex,
+                include: path.resolve(__dirname, 'src'),
+                loaders: ['bundle?lazy', 'babel']
             }
             // {test: /\.(png|jpg|gif)$/, loader: "url-loader?limit=8192&name=./img/[hash].[ext]"}
         ]

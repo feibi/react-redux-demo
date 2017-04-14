@@ -1,38 +1,25 @@
 import React from 'react'
 import {render} from 'react-dom'
-// 引入redux
 import {Provider} from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
+import {ConnectedRouter as Router } from 'react-router-redux'
 
-const browserHistory = createHistory()
-// 引入router
-//import {Router, hashHistory, browserHistory} from 'react-router'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
-
-
-//import {ConnectedRouter as Router } from 'react-router-redux'
+import configureStore from './store/configureStore'
 import App from './app'
 
-import configureStore from './configureStore'
-import rootReducer from './reducers/rooterReducer'
 import "./sass/base.scss";
 
+const history = createHistory();
+const store = configureStore(history); // 路由的store*/
 
-const history = createHistory()
-const store = configureStore(rootReducer) // 路由的store*/
-
-console.info(process.env, __DEVTOOLS__)
+console.info(process.env, __DEVTOOLS__);
 
 render((
     <Provider store={store}>
         <div className="devtools">
-            <Router >
+            <Router history={history}>
                 <App/>
             </Router>
         </div>
     </Provider>
-), document.getElementById('root'))
+), document.getElementById('root'));

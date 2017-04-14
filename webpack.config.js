@@ -1,12 +1,12 @@
-let webpack = require('webpack');
-let path = require('path');
-let HtmlwebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const path = require('path');
+const HtmlwebpackPlugin = require('html-webpack-plugin');
 //var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
-let ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 // webpack-dashboard
-let Dashboard = require('webpack-dashboard');
-let DashboardPlugin = require('webpack-dashboard/plugin');
-//var dashboard = new Dashboard();
+const Dashboard = require('webpack-dashboard');
+const DashboardPlugin = require('webpack-dashboard/plugin');
+const dashboard = new Dashboard();
 
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const vendors = [
@@ -21,13 +21,13 @@ const vendors = [
     'rc-queue-anim',
     // ...其它库
 ];
-let minSize = {
+const minSize = {
     minChunkSize: 51200,
     compress: {
         warnings: false
     }
-}
-let routeComponentRegex = /containers\/([^\/]+\/?[^\/]+).js$/
+};
+const routeComponentRegex = /pages\/([^\/]+\/?[^\/]+).js$/
 module.exports = {
     //页面入口文件配置
     entry: {
@@ -41,7 +41,7 @@ module.exports = {
         'path': path.resolve(__dirname, './build'),
         // 'publicPath': '/build',// 网站运行时的访问路径
         'filename': 'js/[name].[hash:8].js',
-        'chunkFilename': 'js/[name]-[chunkhash:8].js',
+        'chunkFilename': 'js/page[name]-[chunkhash:8].js',
         'library': '[name]'
     },
     resolve: {
@@ -92,7 +92,7 @@ module.exports = {
     devtool: 'cheap-module-eval-source-map',
     //插件项
     plugins: [ //将外部的包导出成一个公用的文件比如 jquery，react, react-dom 等
-        //new DashboardPlugin(dashboard.setData),
+        new DashboardPlugin(dashboard.setData),
         new HtmlwebpackPlugin({
             template: __dirname + '/src/index.html', //html模板路径
             filename: 'index.html',

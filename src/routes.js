@@ -1,41 +1,21 @@
 import React from 'react'
-//import {Route, IndexRoute} from 'react-router'
-import {
-  //BrowserRouter as Router,
-  Route,
-  Switch
-} from 'react-router-dom'
-import Bundle from './bundle'
-import App from './index'
-import About from './containers/about/'
-import FindRoom from './containers/findRoom/'
-import Welcome from './containers/welcome/'
-import List from './containers/list/'
+import { Route, Switch } from 'react-router-dom'
+
+import lazyLoad from './until/lazyLoadRoute'
+import Welcome from './pages/welcome/'
+import About from './pages/about/'
+import Contact from './pages/contact/'
+import List from './pages/list/'
+import NoMatch from './pages/noMatch'
 
 const Routes = ()=>(
   <Switch>
-    <Route path="/" exact component={()=>(
-      <Bundle load={Welcome}>
-          {(Comp) => Comp?<Comp/>:<div>loading</div>}
-      </Bundle>
-    )}/>
-    <Route path="/contact" component={()=>(
-        <Bundle load={FindRoom}>
-            {(Comp) => Comp?<Comp/>:<div>loading</div>}
-         </Bundle>
-    )}/>
-    <Route path="/about" component={()=>(
-        <Bundle load={About}>
-            {(Comp) => Comp?<Comp/>:<div>loading</div>}
-        </Bundle>
-    )}/>
-    <Route path="/list" component={()=>(
-        <Bundle load={List}>
-            {(Comp) => Comp?<Comp/>:<div>loading</div>}
-        </Bundle>
-    )}/>
+    <Route path="/" exact component={lazyLoad(Welcome)}/>
+    <Route path="/contact" render={lazyLoad(Contact)}/>
+    <Route path="/about" component={lazyLoad(About)}/>
+    <Route path="/list" component={lazyLoad(List)}/>
+    <Route component={lazyLoad(NoMatch)}/>
   </Switch>
-
-)
+);
 
 export default Routes

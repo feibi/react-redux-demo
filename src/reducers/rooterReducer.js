@@ -49,6 +49,6 @@ function postsBySubreddit(state = {}, action) {
     }
 }
 
-const rootReducer = combineReducers({posts})
+const rootReducer = combineReducers({router:routerReducer,posts})
 
 export default rootReducer
