@@ -22,7 +22,7 @@ class Bundle extends Component {
     load(props) {
         this.setState({
             mod: null
-        })
+        });
         props.load((mod) => {
             this.setState({
                 // handle both es imports and cjs
@@ -36,4 +36,13 @@ class Bundle extends Component {
     }
 }
 
-export default Bundle
+export default function lazyLoad(module){
+
+    return function (props) {
+        return (
+            <Bundle load={module}>
+                {(Comp) => Comp?<Comp {...props}/>:<div>loading</div>}
+            </Bundle>
+        )
+    }
+}

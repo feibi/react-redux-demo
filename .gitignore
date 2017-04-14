@@ -1,6 +1,6 @@
 .git
 .idea
-.yarn-error.log
+yarn-error.log
 .npm-error.log
 /node_modules
 /dist

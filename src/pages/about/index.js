@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import QueueAnim from 'rc-queue-anim';
 import  Message from './../../components/Message'
 import Button from './../../components/button/button'
-
+import {Link} from 'react-router-dom'
 const message = Message.newInstance({});
 
 
@@ -78,6 +78,9 @@ class About extends React.Component {
                     </div>
                     <div className="panel">
                         <Button title="自定义关闭" onClick={this.toMessage}/>
+                    </div>
+                    <div>
+                        <Link to='/no-match'>no match</Link>
                     </div>
                 </div>
             </QueueAnim>
