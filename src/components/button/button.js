@@ -20,4 +20,4 @@ Button.defaultProps = {
     title: 'button'
 }
 
-module.exports = Button;
+export default Button;

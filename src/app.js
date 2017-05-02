@@ -31,4 +31,4 @@ function mapStateToProps(state) {
     return {}
 }
 
-module.exports = App;
+export default App;

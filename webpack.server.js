@@ -26,14 +26,13 @@ module.exports = {
     },
     //入口文件输出配置
     output: {
-        'path': path.join(__dirname, 'dist'),
+        path: path.join(__dirname, 'dist'),
         // 'publicPath': '/build',// 网站运行时的访问路径
-        'filename': 'js/[name].[chunkhash:8].js',
-        'chunkFilename': 'js/page[name]-[chunkhash:8].js'
+        filename: 'js/[name].[chunkhash:8].js',
+        chunkFilename: 'js/page[name]-[chunkhash:8].js'
     },
     resolve: {
         extensions: [
-            '',
             '.js',
             '.jsx',
             '.scss',
@@ -49,24 +48,30 @@ module.exports = {
                 test: /\.js?$/,
                 exclude: /(node_modules|bower_components)/,
                 // 在这里添加 react-hot，注意这里使用的是loaders，所以不能用 query，应该把presets参数写在 babel 的后面
-                loader: 'babel',
+                loader: 'babel-loader',
                 include: /src/
             }, {
                 test: /\.(gif|jpg|png|woff|svg|eot|ttf|otf)\??.*$/,
-                loader: 'url?limit=10000&name=fonts/[hash:8].[name].[ext]'
+                use: 'url-loader?limit=10000&name=fonts/[hash:8].[name].[ext]'
             }, {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
-            }, {
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    //resolve-url-loader may be chained before sass-loader if necessary
+                    use: ['css-loader', 'sass-loader']
+                })            }, {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader?modules"
+                })
             }, {
                 test: /\.html$/,
-                loader: 'html-loader'
+                use: 'html-loader'
             }, {
                 test: routeComponentRegex,
                 include: path.resolve(__dirname, 'src'),
-                loaders: ['bundle?lazy', 'babel']
+                use: ['bundle-loader?lazy', 'babel-loader']
             }
             // {test: /\.(png|jpg|gif)$/, loader: "url-loader?limit=8192&name=./img/[hash].[ext]"}
         ]
@@ -82,7 +87,6 @@ module.exports = {
             ],
             //filename: "vendor.js"
             // (Give the chunk a different name)
-
             minChunks: Infinity,
             // (with more entries, this ensures that no other module
             //  goes into the vendor chunk)
@@ -106,8 +110,10 @@ module.exports = {
             },
             sourceMap: false
         }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true
+        }),
         new ExtractTextPlugin("style/[name]-[chunkhash:8].css"),
-        new webpack.NoErrorsPlugin(), //启用报错不打断模式
-        //new webpack.HotModuleReplacementPlugin() //热替换插件   使用chunkhash后不能用此插件
+        new webpack.NoEmitOnErrorsPlugin(), //启用报错不打断模式
     ]
 };

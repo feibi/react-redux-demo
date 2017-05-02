@@ -1,8 +1,9 @@
 import React from 'react'
-import {render} from 'react-dom'
+import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
 import {ConnectedRouter as Router } from 'react-router-redux'
+import { AppContainer } from 'react-hot-loader';
 
 import configureStore from './store/configureStore'
 import App from './app'
@@ -14,12 +15,22 @@ const store = configureStore(history); // 路由的store*/
 
 console.info(process.env, __DEVTOOLS__);
 
-render((
-    <Provider store={store}>
-        <div className="devtools">
-            <Router history={history}>
-                <App/>
-            </Router>
-        </div>
-    </Provider>
-), document.getElementById('root'));
+const render = () => {
+    ReactDOM.render((
+        <AppContainer>
+            <Provider store={store}>
+                <Router history={history}>
+                    <App/>
+                </Router>
+            </Provider>
+        </AppContainer>
+    ), document.getElementById('root'))
+};
+
+render();
+
+if (module.hot) {
+    module.hot.accept('./app', () => {
+        render()
+    });
+}

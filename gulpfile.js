@@ -1,4 +1,4 @@
-var gulp = require("gulp"),
+let gulp = require("gulp"),
     plumber = require("gulp-plumber"),
     cache = require('gulp-cache'),
     clean = require("gulp-clean"),
@@ -9,11 +9,11 @@ var gulp = require("gulp"),
     gutil = require("gulp-util"),
     autoprefixer = require('gulp-autoprefixer');
  //   sass = require("gulp-sass");
-var webpack = require("webpack");
-var WebpackDevServer = require("webpack-dev-server");
-var webpackConfig = require("./webpack.config.js");
-var webpackserver = require("./webpack.server.js");
-var browserSync = require('browser-sync').create();
+let webpack = require("webpack");
+let WebpackDevServer = require("webpack-dev-server");
+let webpackConfig = require("./webpack.config.js");
+let webpackserver = require("./webpack.server.js");
+let browserSync = require('browser-sync').create();
 
 const reload = browserSync.reload;
 const options = {
@@ -54,7 +54,7 @@ gulp.task('fonts',function () {
 })
 
 // gulp.task('sass', function() {
-//     var sassIn = gulp.src("./src/sass/base.scss")
+//     let sassIn = gulp.src("./src/sass/base.scss")
 //         .pipe(plumber())
 //         .pipe(sourcemaps.init())
 //         .pipe(sass().on('error', sass.logError))
@@ -77,8 +77,8 @@ gulp.task('images', function() {
     if (options.hasImages) {
         return false;
     }
-    var imagesIn = gulp.src('./src/images/**/*');
-    var goIn = options.isFirstRun ? imagesIn
+    let imagesIn = gulp.src('./src/images/**/*');
+    let goIn = options.isFirstRun ? imagesIn
         .pipe(cache(imagemin({
             optimizationLevel: 3,
             progressive: true,
@@ -96,19 +96,21 @@ gulp.task("default", ["clean"], function() {
 
 gulp.task("webpack-dev-server", function(callback) {
     // modify some webpack config options
-    var myConfig = Object.create(webpackConfig);
+    let myConfig = Object.create(webpackConfig);
     //myConfig.devtool = "eval";
-    myConfig.debug = true;
 
     // Start a webpack-dev-server
     new WebpackDevServer(webpack(myConfig), {
         contentBase: "./build/",
+        publicPath: '/',
         stats: {
             colors: true
         },
         hot: true,
+        compress: true,
         inline: true,
-        quiet: true,
+        //quiet: true,
+        historyApiFallback:true,
         proxy: {
             '/personal*': {
                 target: 'http://www.baidu.com',
@@ -136,7 +138,7 @@ gulp.task("build",["clean"], function() {
 
 gulp.task("webpack:build", function(callback) {
     // modify some webpack config options
-    var myConfig = Object.create(webpackserver);
+    let myConfig = Object.create(webpackserver);
     // run webpack
     webpack(myConfig, function(err, stats) {
         if (err) throw new gutil.PluginError("webpack:build", err);

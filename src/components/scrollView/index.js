@@ -49,4 +49,4 @@ class ScrollView extends Component{
     }
 }
 
-module.exports=ScrollView;
+export default ScrollView

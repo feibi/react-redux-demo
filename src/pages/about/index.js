@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import QueueAnim from 'rc-queue-anim';
+//import QueueAnim from 'rc-queue-anim';
 import  Message from './../../components/Message'
 import Button from './../../components/button/button'
 import {Link} from 'react-router-dom'
@@ -62,29 +62,20 @@ class About extends React.Component {
 
     render() {
         return (
-
-            <QueueAnim animConfig={{
-                opacity: [
-                    1, 0
-                ],
-                translateX: [0, -30]
-            }}>
-                <div key='0' className="about">
-                    <div className="panel">
-                        <Button title="默认自动关闭" onClick={this.handleClick}/>
-                    </div>
-                    <div className="panel">
-                        <Button title='默认手动关闭' onClick={this.showMessage}/>
-                    </div>
-                    <div className="panel">
-                        <Button title="自定义关闭" onClick={this.toMessage}/>
-                    </div>
-                    <div>
-                        <Link to='/no-match'>no match</Link>
-                    </div>
+            <div key='0' className="about">
+                <div className="panel">
+                    <Button title="默认自动关闭" onClick={this.handleClick}/>
                 </div>
-            </QueueAnim>
-
+                <div className="panel">
+                    <Button title='默认手动关闭' onClick={this.showMessage}/>
+                </div>
+                <div className="panel">
+                    <Button title="自定义关闭" onClick={this.toMessage}/>
+                </div>
+                <div>
+                    <Link to='/no-match'>no match</Link>
+                </div>
+            </div>
         )
     }
 }

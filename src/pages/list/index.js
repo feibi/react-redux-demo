@@ -75,5 +75,4 @@ class List extends Component {
     }
 }
 
-
-module.exports = List;
+export default List

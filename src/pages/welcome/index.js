@@ -2,7 +2,7 @@
  * Created by zylee on 2016/10/20.
  */
 import React from 'react'
-import {render} from 'react-dom'
+//import Media from 'react-media'
 import Slider from 'react-slick'
 import './index.scss'
 class Welcome extends React.Component {
@@ -19,26 +19,30 @@ class Welcome extends React.Component {
             slidesToScroll: 1
         };
         return (
-            <Slider {...settings}>
-                <div>
-                    <h3>1</h3>
-                </div>
-                <div>
-                    <h3>2</h3>
-                </div>
-                <div>
-                    <h3>3</h3>
-                </div>
-                <div>
-                    <h3>4</h3>
-                </div>
-                <div>
-                    <h3>5</h3>
-                </div>
-                <div>
-                    <h3>6</h3>
-                </div>
-            </Slider>
+            <div>
+                <Slider {...settings}>
+                    <div>
+                        <h3>1</h3>
+                    </div>
+                    <div>
+                        <h3>2</h3>
+                    </div>
+                    <div>
+                        <h3>3</h3>
+                    </div>
+                    <div>
+                        <h3>4</h3>
+                    </div>
+                    <div>
+                        <h3>5</h3>
+                    </div>
+                    <div>
+                        <h3>6</h3>
+                    </div>
+                </Slider>
+
+            </div>
+
         );
     }
 }

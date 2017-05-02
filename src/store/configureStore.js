@@ -5,6 +5,7 @@ import rootReducer from '../reducers/rooterReducer'
 
 export default function configureStore(history) {
     let store;
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     const router = routerMiddleware(history)
     if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
         const createLogger = require('redux-logger');
@@ -13,10 +14,10 @@ export default function configureStore(history) {
         const DevTools = require('./../middleware/DevTools')
         // 创建一个中间件集合
         const middleware = [thunk]; //, loggerMiddleware
-        store = compose(applyMiddleware(...middleware))(createStore);
+        store = composeEnhancers(applyMiddleware(...middleware))(createStore);
     } else {
         store = compose(applyMiddleware(thunk))(createStore);
     }
 
     return store(rootReducer)
-} 
+}
