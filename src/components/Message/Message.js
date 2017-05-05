@@ -1,10 +1,9 @@
 /**
  * Created by zylee on 2017/3/13.
  */
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import classNames from 'classnames';
+import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import MessageItem from './MessageItem'
 import './message.scss'
 

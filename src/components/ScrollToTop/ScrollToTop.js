@@ -1,4 +1,4 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
 class ScrollToTop extends Component {

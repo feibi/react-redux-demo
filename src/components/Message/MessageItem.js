@@ -1,7 +1,8 @@
 /**
  * Created by zylee on 2017/3/13.
  */
-import React, {PropTypes, Component} from 'react';
+import React, { Component} from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 

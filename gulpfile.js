@@ -111,6 +111,7 @@ gulp.task("webpack-dev-server", function(callback) {
         inline: true,
         //quiet: true,
         historyApiFallback:true,
+        disableHostCheck: true,
         proxy: {
             '/personal*': {
                 target: 'http://www.baidu.com',
