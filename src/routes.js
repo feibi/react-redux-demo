@@ -13,7 +13,8 @@ const Routes = ()=>(
     <Route path="/" exact component={lazyLoad(Welcome)}/>
     <Route path="/contact" render={lazyLoad(Contact)}/>
     <Route path="/about" component={lazyLoad(About)}/>
-    <Route path="/list" component={lazyLoad(List)}/>
+    <Route path="/list" exact component={lazyLoad(List)}/>
+    <Route path="/list/:id"  render={({match})=><div>{match.params.id}</div>}/>
     <Route component={lazyLoad(NoMatch)}/>
   </Switch>
 );
